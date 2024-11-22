@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 
 // Use NEXT_PUBLIC_API_URL for client-side environment variables
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 3000;
+const API_URL = process.env.NEXT_PUBLIC_API_URL || '';
 
 type Todo = {
   _id: string;
@@ -103,7 +103,7 @@ export default function TodoApp() {
               {todo.task}
             </span>
             <button
-              className="bg-red-500 text-white p-2 ml-2 w-20"
+              className="bg-red-500 text-white p-1 ml-2"
               onClick={() => deleteTodo(todo._id)}
             >
               Delete
