@@ -1,0 +1,39 @@
+services:
+  frontend:
+    build:
+      context: ./frontend  # Set the context to the frontend directory
+      dockerfile: Dockerfile.dev  # Specify the Dockerfile in the frontend directory
+    ports:
+      - "3000:3000"  # Expose port 3000 to access the Next.js app
+    volumes:
+      - ./frontend:/app  # Mount the frontend directory to /app in the container
+    environment:
+      - NODE_ENV=development  # Set environment variable for development
+    command: npm run dev  # Override the CMD to run the development server
+  
+  
+  backend:
+    build:
+      context: ./backend  
+      dockerfile: Dockerfile.dev
+    ports: 
+      - "4000:4000"
+    volumes:
+      - ./backend:/app
+    environment:
+      - NODE_ENV=development
+    command: npm run dev
+
+  database: 
+    image: mongo:latest
+    volumes:
+      - ./db_data:/data/db
+    ports:
+      - "27017:27017"
+    # environment:
+    #   MONGO_INITDB_ROOT_USERNAME: admin
+    #   MONGO_INITDB_ROOT_PASSWORD: 1234
+
+# volumes: need to use for named volume
+#   db_data:
+#     driver: local
