@@ -1,0 +1,33 @@
+services:
+  frontend:
+    build:
+      context: ./frontend  # Set the context to the frontend directory
+      dockerfile: Dockerfile.production  # Specify the Dockerfile in the frontend directory
+    ports:
+      - "3000:3000"  # Expose port 3000 to access the Next.js app
+    volumes:
+      - ./frontend:/app  # Mount the frontend directory to /app in the container
+    environment:
+      - NODE_ENV=production  # Set environment variable for development
+  
+  
+  backend:
+    build:
+      context: ./backend  
+      dockerfile: Dockerfile.production
+    ports: 
+      - "4000:4000"
+    volumes:
+      - ./backend:/app
+    environment:
+      - NODE_ENV=production
+
+  database: 
+    image: mongo:latest
+    volumes:
+      - ./db_data:/data/db
+    ports:
+      - "27017:27017"
+    # environment:
+    #   MONGO_INITDB_ROOT_USERNAME: admin
+    #   MONGO_INITDB_ROOT_PASSWORD: 1234
