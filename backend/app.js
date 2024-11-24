@@ -16,7 +16,11 @@ const { MongoClient, ObjectId } = require('mongodb');
 const cors = require('cors');
 const dotenv = require('dotenv');
 
-dotenv.config(); // Ensure .env.dev is loaded correctly
+const envFile = process.env.NODE_ENV === 'production' 
+  ? '.env.production' 
+  : '.env.development';
+dotenv.config({ path: envFile });
+// dotenv.config(); // Ensure .env.dev is loaded correctly
 
 const app = express();
 app.use(express.json());
