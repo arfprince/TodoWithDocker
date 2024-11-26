@@ -9,7 +9,9 @@ services:
       - ./frontend:/app  # Mount the frontend directory to /app in the container
     environment:
       - NODE_ENV=production  # Set environment variable for development
-  
+    networks:
+      - app-network
+
   backend:
     build:
       context: ./backend  
@@ -20,6 +22,8 @@ services:
       - ./backend:/app
     environment:
       - NODE_ENV=production
+    networks:
+      - app-network
 
   database: 
     image: mongo:latest
@@ -27,6 +31,8 @@ services:
       - ./db_data:/data/db
     ports:
       - "27017:27017"
+    networks:
+      - app-network
 
   nginx:
     image: nginx:alpine
@@ -36,4 +42,8 @@ services:
     ports:
       - "80:80"
       - "443:443"
-
+    networks:
+      - app-network
+networks:
+  app-network:
+    driver: bridge

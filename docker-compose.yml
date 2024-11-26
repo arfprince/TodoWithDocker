@@ -9,6 +9,7 @@ services:
       - ./frontend:/app  # Mount the frontend directory to /app in the container
     environment:
       - NODE_ENV=development  # Set environment variable for development
+      
   
   
   backend:

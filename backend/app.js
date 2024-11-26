@@ -14,7 +14,9 @@
 const express = require('express');
 const { MongoClient, ObjectId } = require('mongodb');
 const cors = require('cors');
+const https = require('https');
 const dotenv = require('dotenv');
+
 
 const envFile = process.env.NODE_ENV === 'production' 
   ? '.env.production' 
@@ -56,6 +58,7 @@ MongoClient.connect(MONGO_URI, { useUnifiedTopology: true })
 app.get('/api/todos', async (req, res) => {
   const todos = await todosCollection.find().toArray();
   res.json(todos);
+  console.log('GET /api/todos hit');
 });
 
 app.post('/api/todos', async (req, res) => {
