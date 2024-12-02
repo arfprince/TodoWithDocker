@@ -29,7 +29,7 @@ services:
   nginx:
     build:
       context: ./nginx  # Build the nginx Dockerfile
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.production
     ports:
       - "443:443"
     networks:
